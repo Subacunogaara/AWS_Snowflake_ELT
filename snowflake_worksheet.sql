@@ -57,8 +57,11 @@ country VARCHAR
     //Creating stream for raw data table
 CREATE OR REPLACE STREAM json_stream ON TABLE raw_data_table;
 
-
-    
+    //Creating task for reading stream object  
+CREATE OR REPLACE TASK read_stream
+WAREHOUSE = COMPUTE_WH
+SCHEDULE = '5 MINUTE'
+AS
 INSERT INTO server_install_table(
 SELECT
     $1:event_data:data:eventData:app_user_id AS player_id,
@@ -70,3 +73,7 @@ SELECT
 FROM json_stream
 WHERE $1:event_data:data:eventData:eventType = 'server_install'
 );
+
+    //Starting and suspending task
+ALTER TASK read_stream RESUME;
+ALTER TASK read_stream SUSPEND;
