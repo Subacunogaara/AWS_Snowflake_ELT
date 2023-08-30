@@ -3,7 +3,7 @@ CREATE OR REPLACE STORAGE INTEGRATION s3_integr
     TYPE = EXTERNAL_STAGE
     STORAGE_PROVIDER = S3
     ENABLED = TRUE
-    STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::083226907131:role/snowflake-access-role'
+    STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::**********:role/snowflake-access-role'
     STORAGE_ALLOWED_LOCATIONS = ('s3://snowflakeelts3bucket/json_folder');
 
     //For setting policy
